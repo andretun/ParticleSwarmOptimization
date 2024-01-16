@@ -101,15 +101,18 @@ void Swarm::initialiseSwarm()
 
 void Swarm::updateParticles()
 {
-	random_numbers[0] = generateRandom(0., 1.);
-	random_numbers[1] = generateRandom(0., 1.);
+	double random_numbers[2];
 
 	for(auto& particle : particles)
+	{
+		random_numbers[0] = generateRandom(0., 1.);
+		random_numbers[1] = generateRandom(0., 1.);
 		particle.updatePosition(velocity_parameters,
 								random_numbers,
 								lower_bounds,
 								upper_bounds,
 								swarm_best_position);
+	}
 }
 
 double Swarm::generateRandom(double lb, double ub)

@@ -33,7 +33,6 @@ private:
 	std::vector<double> swarm_best_position;
 	double swarm_best_fitness;
 	double velocity_parameters[3] = {0.7298437881283576, 1.496179765663133, 1.496179765663133}; // Clerc and Kennedy constriction coefficients
-	double random_numbers[2];
 
 	// private functions
 	void initialiseSwarm();
