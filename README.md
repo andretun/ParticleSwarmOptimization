@@ -18,21 +18,21 @@ A simple C++ implementation of the basic PSO is provided here. The code is based
 At the initialization, a user-defined number of particles are initialised with random positions (uniformely distributed in the solutions space). After the first iteration, each personal best position and the global best position are set, therefore allowing to build the particle velocities needed to move through the space.
 The position is updated as follows, where _i_ is the index of the particle:
 
-$$$\bold{x_i}(t+1) = \bold{x_i}(t) + \bold{v_i}(t+1) = \bold{x_i}(t) + \omega \cdot \bold{v_i}(t) + c_1 \cdot r_1(0,1) \cdot [\bold{P_i(t)} - \bold{x_i(t)}] + c_2 \cdot r_2(0,1) \cdot [\bold{S_i(t)} - \bold{x_i(t)}]$$$ 
+$$\bold{x_i}(t+1) = \bold{x_i}(t) + \bold{v_i}(t+1) = \bold{x_i}(t) + \omega \cdot \bold{v_i}(t) + c_1 \cdot r_1(0,1) \cdot [\bold{P_i(t)} - \bold{x_i(t)}] + c_2 \cdot r_2(0,1) \cdot [\bold{S_i(t)} - \bold{x_i(t)}]$$
 
 As it is shown in the equation, the velocity consists of three components, the **inertial** , **cognitive**, and **social** terms.
 
 ##### Inertial term
 The inertial term, as the name suggests, represent the dependence on the velocity at the previous iteration.
-It depends on the hyperparameter $$\omega$$.
+It depends on the hyperparameter $\omega$.
 
 ##### Cognitive term
 The cognitive term provides a component to the velocity dependent on the personal best position, therefore inuitively adding the direction the region of space in which the particle found its best objective function solution.
-It depends on the hyperparameter $$c_1$$ and a random number between $$0$$ and $$1$$, $$r_1(0,1)$$, generated at each iteration.
+It depends on the hyperparameter $c_1$ and a random number between $0$ and $1$, $r_1(0,1)$, generated at each iteration.
 
 ##### Social term
 The social term provides a component to the velocity dependent on the global best position, therefore inuitively adding the direction the region of space in which the swarm found its best objective function solution.
-It depends on the hyperparameter $$c_2$$ and a random number between $$0$$ and $$1$$, $$r_2(0,1)$$, generated at each iteration.
+It depends on the hyperparameter $$c_2$$ and a random number between $0$ and $1$, $r_2(0,1)$, generated at each iteration.
 
 In the simplest PSO implementation presented, there are only thre hyperparameters, as shown in the explanation of the three terms of the velocity. These parameters can be changed at will, giving more importance to whichever terms.
 In this code, the hyperparameter set by [Clerc and Kennedy (2002)](https://ieeexplore.ieee.org/document/985692) is used.
