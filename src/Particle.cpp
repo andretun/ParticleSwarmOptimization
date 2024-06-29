@@ -1,4 +1,4 @@
-#include "../include/Particle.h"
+#include "Particle.h"
 
 /*
  ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████  ██████  ██████ 
@@ -8,15 +8,14 @@
  ██████  ██████  ██   ████ ███████    ██    ██   ██  ██████   ██████    ██     ██████  ██   ██
 */
 
-Particle::Particle(std::vector<double> pos)
-{
+Particle::Particle(std::vector<double> pos) {
 	position = pos;
 
 	for(size_t i = 0; i < position.size(); i++)
 		velocity.push_back(0.);
 
 	best_fitness = std::numeric_limits<double>::infinity();
-}
+	}
 
 Particle::Particle() {}
 
