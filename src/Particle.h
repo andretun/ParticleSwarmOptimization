@@ -1,6 +1,8 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
+#include "utils.h"
+
 #include <vector>
 #include <limits>
 

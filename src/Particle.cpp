@@ -1,41 +1,24 @@
 #include "Particle.h"
 
-/*
- ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████  ██████  ██████ 
-██      ██    ██ ████   ██ ██         ██    ██   ██ ██    ██ ██         ██    ██    ██ ██   ██
-██      ██    ██ ██ ██  ██ ███████    ██    ██████  ██    ██ ██         ██    ██    ██ ██████ 
-██      ██    ██ ██  ██ ██      ██    ██    ██   ██ ██    ██ ██         ██    ██    ██ ██   ██
- ██████  ██████  ██   ████ ███████    ██    ██   ██  ██████   ██████    ██     ██████  ██   ██
-*/
-
 Particle::Particle(std::vector<double> pos) {
 	position = pos;
 
-	for(size_t i = 0; i < position.size(); i++)
+	for(uint i = 0; i < position.size(); i++)
 		velocity.push_back(0.);
 
 	best_fitness = std::numeric_limits<double>::infinity();
-	}
+}
 
 Particle::Particle() {}
 
 Particle::~Particle() {}
 
-/*
-███████ ██     ██  █████  ██████  ███    ███     ███████ ██    ██ ███    ██  ██████ ████████ ██  ██████  ███    ██ ███████
-██      ██     ██ ██   ██ ██   ██ ████  ████     ██      ██    ██ ████   ██ ██         ██    ██ ██    ██ ████   ██ ██     
-███████ ██  █  ██ ███████ ██████  ██ ████ ██     █████   ██    ██ ██ ██  ██ ██         ██    ██ ██    ██ ██ ██  ██ ███████
-     ██ ██ ███ ██ ██   ██ ██   ██ ██  ██  ██     ██      ██    ██ ██  ██ ██ ██         ██    ██ ██    ██ ██  ██ ██      ██
-███████  ███ ███  ██   ██ ██   ██ ██      ██     ██       ██████  ██   ████  ██████    ██    ██  ██████  ██   ████ ███████
-*/
-
 void Particle::updateVelocity(double param[],
 							  double rand_nums[],
 							  std::vector<double> lower_bounds,
 							  std::vector<double> upper_bounds,
-							  std::vector<double> swarm_best_position)
-{
-	for(size_t i = 0; i < velocity.size(); i++)
+							  std::vector<double> swarm_best_position) {
+	for(uint i = 0; i < velocity.size(); i++)
 	{	
 		// Add
 		velocity[i] += param[0]*velocity[i] +
@@ -49,14 +32,13 @@ void Particle::updateVelocity(double param[],
 }
 
 void Particle::updatePosition(double param[],
-		                    double rand_nums[],
-						std::vector<double> lower_bounds,
-						std::vector<double> upper_bounds,
-						std::vector<double> swarm_best_position)
-{
+		                      double rand_nums[],
+							  std::vector<double> lower_bounds,
+							  std::vector<double> upper_bounds,
+							  std::vector<double> swarm_best_position) {
 	updateVelocity(param, rand_nums, lower_bounds, upper_bounds, swarm_best_position);
 
-	for(size_t i = 0; i < velocity.size(); i++)
+	for(uint i = 0; i < velocity.size(); i++)
 	{
 		// Add
 		position[i] += velocity[i];
