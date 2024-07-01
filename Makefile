@@ -18,7 +18,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(SRC_DIR)/%.o, $(SRCS))
 
 # List of shared library files
 SHARED_LIBS = $(patsubst $(SRC_DIR)/%.o, $(SRC_DIR)/%.so, $(OBJS))
-SHARED_LIBS_FLAGS = $(patsubst $(SRC_DIR)/%.o, -l%, $(OBJS))
+SHARED_LIBS_FLAGS = -L$(SRC_DIR) -lSwarm -lParticle -lutils
 
 # List of shared library files
 STATIC_LIBS = $(patsubst $(SRC_DIR)/%.o, $(SRC_DIR)/%.a, $(OBJS))
@@ -32,12 +32,7 @@ libs: $(OBJS) $(SHARED_LIBS) $(STATIC_LIBS) $(SYMLINKS)
 all: libs main
 
 main:
-	$(GCC) $(GCC_FLAGS) -o main.exe main.cpp -L$(SRC_DIR) -lSwarm -lParticle -lutils
-
-test:
-	echo $(SRCS)
-	echo $(OBJS)
-	echo $(SHARED_LIBS_FLAGS)
+	$(GCC) $(GCC_FLAGS) -o main.exe main.cpp $(SHARED_LIBS_FLAGS)
 
 # Rule to create symlinks
 $(SRC_DIR)/lib%.so: $(SRC_DIR)/%.so

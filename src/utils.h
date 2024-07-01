@@ -4,12 +4,12 @@
 #include <random>
 
 #define ERROR(...) \
-	printf("[%s,%d] Error: ") \
-	printf(__VA__ARGS__)
+	printf("[%s,%d] Error: ", __FILE__, __LINE__); \
+	printf(__VA__ARGS__);
 
 #define DEBUG(...) \
-	printf("[%s,%d] DEBUG: ") \
-	printf(__VA__ARGS__)
+	printf("[%s,%d] DEBUG: ", __FILE__, __LINE__); \
+	printf(__VA_ARGS__);
 
 /**
  * @brief Generate random number inside a given range
@@ -18,6 +18,5 @@
  */
 double generateRandom(double lb,
 					  double ub);
-
 
 #endif

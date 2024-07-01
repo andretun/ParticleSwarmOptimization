@@ -13,8 +13,10 @@ public:
 	/**
 	 * @brief Constructor
 	 * param[in] pos initial position
+	 * param[in] vel initial initial velocity
 	 */
-	Particle(std::vector<double> pos);
+	Particle(std::vector<double> pos,
+			 std::vector<double> vel);
 
 	/**
 	 * @brief Emprty constructor
@@ -68,16 +70,22 @@ public:
 	void setBestFitness(double new_best_fit);
 
 	/**
+	 * @brief Get particle position
+	 * @return position
+	 */
+	std::vector<double> getPosition() const;
+	
+	/**
 	 * @brief Get particle best position
 	 * @return best_position
 	 */
-	std::vector<double> getPosition();
+	std::vector<double> getBestPosition() const;
 
 	/**
 	 * @brief Get particle best fitness
 	 * @return best_fitness
 	 */
-	double getBestFitness();
+	double getBestFitness() const;
 
 private:
 	/**
