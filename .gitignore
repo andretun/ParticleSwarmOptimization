@@ -1,2 +1,5 @@
 *.so
 *.o
+*.a
+*.exe
+main.cpp
