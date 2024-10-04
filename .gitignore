@@ -1,5 +1,14 @@
+# C++
 *.so
 *.o
 *.a
 *.exe
 main.cpp
+
+# Python
+__pycache__
+*.ipynb
+*.py
+
+# Others
+*.csv

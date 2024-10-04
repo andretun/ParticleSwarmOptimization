@@ -18,7 +18,7 @@ A simple C++ implementation of the basic PSO is provided here. The code is based
 At the initialization, a user-defined number of particles are initialised with random positions (uniformely distributed in the solutions space). After the first iteration, each personal best position and the global best position are set, therefore allowing to build the particle velocities needed to move through the space.
 The position is updated as follows, where _i_ is the index of the particle:
 
-$\bold{x_i}(t+1) = \bold{x_i}(t) + \bold{v_i}(t+1) = \bold{x_i}(t) + \omega \cdot \bold{v_i}(t) + c_1 \cdot r_1(0,1) \cdot [\bold{P_i(t)} - \bold{x_i(t)}] + c_2 \cdot r_2(0,1) \cdot [\bold{S_i(t)} - \bold{x_i(t)}]$
+$`\bold{x_i}(t+1) = \bold{x_i}(t) + \bold{v_i}(t+1) = \bold{x_i}(t) + \omega \cdot \bold{v_i}(t) + c_1 \cdot r_1(0,1) \cdot [\bold{P_i(t)} - \bold{x_i(t)}] + c_2 \cdot r_2(0,1) \cdot [\bold{S_i(t)} - \bold{x_i(t)}]`$
 
 As it is shown in the equation, the velocity consists of three components, the **inertial** , **cognitive**, and **social** terms.
 

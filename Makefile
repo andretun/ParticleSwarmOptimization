@@ -59,4 +59,4 @@ clean:
 	rm -f $(SRC_DIR)/*.o $(SRC_DIR)/*.so $(SRC_DIR)/lib*.so $(SRC_DIR)/*.a *.exe
 
 # Phony targets
-.PHONY: all clean
+.PHONY: libs all clean

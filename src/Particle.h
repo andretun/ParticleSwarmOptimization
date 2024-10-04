@@ -6,35 +6,39 @@
 #include <vector>
 #include <limits>
 
-class Particle
-{
+/**
+ * @brief Class for PSO particle
+ */
+class Particle {
 public:
+	/**
+	 * @brief Constructor
+	 * @details Initializes velocity to zero and best fitness to infinity
+	 */
+	Particle();
 	
 	/**
 	 * @brief Constructor
-	 * param[in] pos initial position
-	 * param[in] vel initial initial velocity
+	 * @see Particle()
+	 * @details Parameters initialized as inputs
+	 * @param[in] pos initial position
+	 * @param[in] vel initial initial velocity
 	 */
 	Particle(std::vector<double> pos,
 			 std::vector<double> vel);
 
 	/**
-	 * @brief Emprty constructor
-	 */
-	Particle();
-
-	/**
-	 * @brief Destructor
+	 * @brief Destructor. NOOP.
 	 */
 	~Particle();
 
 	/**
 	 * @brief Update particle velocity
-	 * param[in] params 3-elements array with velocity update coefficients
-	 * param[in] rand_nums 2-elements array with velocity update random numbers
-	 * param[in] lower_bounds standard vector with problem lower bounds
-	 * param[in] upper_bounds standard vector with problem upper bounds
-	 * param[in] swarm_best_position standard vector with swarm best position
+	 * @param[in] params 3-elements array with velocity update coefficients
+	 * @param[in] rand_nums 2-elements array with velocity update random numbers
+	 * @param[in] lower_bounds standard vector with problem lower bounds
+	 * @param[in] upper_bounds standard vector with problem upper bounds
+	 * @param[in] swarm_best_position standard vector with swarm best position
 	 */
 	void updateVelocity(double param[],
 					    double rand_nums[], 
@@ -42,14 +46,13 @@ public:
 						std::vector<double> upper_bounds,
 						std::vector<double> swarm_best_position);
 
-
 	/**
 	 * @brief Update particle position
-	 * param[in] params 3-elements array with velocity update coefficients
-	 * param[in] rand_nums 2-elements array with velocity update random numbers
-	 * param[in] lower_bounds standard vector with problem lower bounds
-	 * param[in] upper_bounds standard vector with problem upper bounds
-	 * param[in] swarm_best_position standard vector with swarm best position
+	 * @param[in] params 3-elements array with velocity update coefficients
+	 * @param[in] rand_nums 2-elements array with velocity update random numbers
+	 * @param[in] lower_bounds standard vector with problem lower bounds
+	 * @param[in] upper_bounds standard vector with problem upper bounds
+	 * @param[in] swarm_best_position standard vector with swarm best position
 	 */
 	void updatePosition(double param[],
 					    double rand_nums[], 
@@ -107,6 +110,16 @@ private:
 	 * Particle best fitness
 	 */
 	double best_fitness;
+
+	/**
+	 * @brief Bounce against boundsries
+	 * @param[in] i position index
+	 * @param[in] lb i-th dimension lower bound
+	 * @param[in] ub i-th dimension upper bound
+	 */
+	void bounce(uint i,
+				double lb,
+				double ub);
 };
 
 #endif

@@ -4,32 +4,36 @@
 #include "utils.h"
 #include "Particle.h"
 
-#include <vector>
 #include <functional>
-#include <limits>
 #include <iostream>
+#include <fstream>
 
-class Swarm
-{
+/**
+ * @brief Class for PSO swarm
+ */
+class Swarm {
 public:
 	/**
+	 * @brief Empty constructor
+	 * @details Initializes best iterations to zero
+	 */
+	Swarm();
+
+	/**
 	 * @brief Constructor
-	 * param[in] num_particles number of particles
-	 * param[in] num_iters number of iterations
-	 * param[in] lbs standard vector with problem lower bounds
-	 * param[in] ubs standard vector with problem upper bounds
-	 * param[in] global flag for global or knowledge of the best position. If false, each particle knows just the best position of the closest one.
+	 * @see Swarm()
+	 * @see initialise()
+	 * @param[in] num_particles number of particles
+	 * @param[in] num_iters number of iterations
+	 * @param[in] lbs standard vector with problem lower bounds
+	 * @param[in] ubs standard vector with problem upper bounds
+	 * @param[in] output csv file name (defaults to "output")
 	 */
 	Swarm(int num_particles,
 	 	  int num_iters,
 	 	  std::vector<double> lbs,
 		  std::vector<double> ubs,
-		  bool glob = true);
-
-	/**
-	 * @brief Empty constructor
-	 */
-	Swarm();
+		  std::string name = "output");
 
 	/**
 	 * @brief Destructor
@@ -38,21 +42,21 @@ public:
 	
 	/**
 	 * @brief Initialise swarm
-	 * param[in] num_particles number of particles
-	 * param[in] num_iters number of iterations
-	 * param[in] lbs standard vector with problem lower bounds
-	 * param[in] ubs standard vector with problem upper bounds
-	 * param[in] global flag for global or knowledge of the best position. If false, each particle knows just the best position of the closest one.
+	 * @param[in] num_particles number of particles
+	 * @param[in] num_iters number of iterations
+	 * @param[in] lbs standard vector with problem lower bounds
+	 * @param[in] ubs standard vector with problem upper bounds
+	 * @param[in] output csv file name (defaults to "output")
 	 */
 	void initialise(int num_particles,
  					int num_iters,
 	 	       		std::vector<double> lbs,
 		       		std::vector<double> ubs,
-		 		    bool glob = true);
+		    	    std::string name = "output");
 	
 	/**
 	 * @brief Optimization function
-	 * param[in] fun function to minimizie
+	 * @param[in] fun function to minimizie
 	 */
 	void optimize(std::function<double(std::vector<double>)>);
 
@@ -98,14 +102,19 @@ private:
 	std::vector<double> swarm_best_position;
 
 	/**
+	 * Swarm (global) best iteration
+	 */
+	uint swarm_best_iter;
+
+	/**
+	 * Swarm (global) best particle
+	 */
+	uint swarm_best_particle;
+
+	/**
 	 * Swarm (global) best fitness
 	 */
 	double swarm_best_fitness;
-
-	/**
-	 * Global knowledge pf best fitness by the particles
-	 */
-	bool global;
 
 	/**
 	 * Default velocity parameters (Clerc and Kennedy constriction coefficients)
@@ -113,23 +122,31 @@ private:
 	double velocity_parameters[3] = {0.7298437881283576, 1.496179765663133, 1.496179765663133};
 
 	/**
-	 * @brief Initialise swarm by creating the particles
+	 * Velocity parameters
 	 */
-	void initialiseSwarm();
+	double vel_par[3];
+
+	/**
+	 * Output csv file name
+	 */
+	std::string outname;
 
 	/**
 	 * @brief Update particles' positions and velocities
-	 * param[in] fun function to minimizie
 	 */
-	void updateParticlesGlobal();
+	void updateParticles();
 
 	/**
-	 * @brief Update particles' positions and velocities with close firsts
-	 * param[in] fun function to minimizie
+	 * @brief Print final particles position to output csv file
+	 * @param[in] s string to prepend at output file name
 	 */
-	void updateParticlesCloseFirsts();
+	void printToCsv(std::string s);
 
-	std::function<double(std::vector<double>)> updateParticles;
+	/**
+	 * @brief Evolve velocity coefficients through iterations
+	 * @param[in] iter_index current iteration index
+	 */
+	void evolveCoefficients(uint iter_index);
 
 };
 
