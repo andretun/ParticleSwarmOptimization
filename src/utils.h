@@ -1,3 +1,10 @@
+/**
+ * @file utils.h
+ * @brief Header file for utils
+ * @date 05/10/2024
+ * @author Andrea Antonione
+ */
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -6,7 +13,6 @@
 #define PRINT(type, ...) \
 	printf("[%s:%d] %s: ", __FILE__, __LINE__, type); \
 	printf(__VA_ARGS__);
-
 
 #define ERROR(...) PRINT("Error", __VA_ARGS__)
 

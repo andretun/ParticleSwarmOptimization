@@ -1,3 +1,10 @@
+/**
+ * @file Particle.h
+ * @brief Header file for class Particle
+ * @date 05/10/2024
+ * @author Andrea Antonione
+ */
+
 #ifndef PARTICLE_H
 #define PARTICLE_H
 

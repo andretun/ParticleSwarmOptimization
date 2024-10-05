@@ -1,3 +1,10 @@
+/**
+ * @file Swarm.h
+ * @brief Header file for class Swarm
+ * @date 05/10/2024
+ * @author Andrea Antonione
+ */
+
 #ifndef SWARM_H
 #define SWARM_H
 

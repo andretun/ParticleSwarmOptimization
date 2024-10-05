@@ -1,3 +1,10 @@
+/**
+ * @file utils.cpp
+ * @brief Source file for utils
+ * @date 05/10/2024
+ * @author Andrea Antonione
+ */
+
 #include "utils.h"
 
 double generateRandom(double lb,

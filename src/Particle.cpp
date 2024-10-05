@@ -1,3 +1,10 @@
+/**
+ * @file Particle.cpp
+ * @brief Source file for class Particle
+ * @date 05/10/2024
+ * @author Andrea Antonione
+ */
+
 #include "Particle.h"
 
 Particle::Particle() {

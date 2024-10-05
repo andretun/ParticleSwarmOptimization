@@ -1,3 +1,10 @@
+/**
+ * @file Swarm.cpp
+ * @brief Source file for class Swarm
+ * @date 05/10/2024
+ * @author Andrea Antonione
+ */
+
 #include "Swarm.h"
 
 Swarm::Swarm() { swarm_best_iter = 0; }
