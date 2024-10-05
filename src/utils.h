@@ -24,6 +24,7 @@
  * @brief Generate random number inside a given range
  * @param[in] lb range lower bound
  * @param[in] ub range upper bound
+ * @return random number inside bounds
  */
 double generateRandom(double lb,
 					  double ub);

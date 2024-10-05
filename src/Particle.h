@@ -20,7 +20,7 @@ class Particle {
 public:
 	/**
 	 * @brief Constructor
-	 * @details Initializes velocity to zero and best fitness to infinity
+	 * @details Initializes best fitness to infinity
 	 */
 	Particle();
 	

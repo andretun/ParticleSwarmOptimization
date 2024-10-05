@@ -7,12 +7,7 @@
 
 #include "Particle.h"
 
-Particle::Particle() {
-	for (uint i = 0; i < position.size(); i++) {
-		velocity.push_back(0.);
-	}
-	best_fitness = std::numeric_limits<double>::infinity();
-}
+Particle::Particle() { best_fitness = std::numeric_limits<double>::infinity(); }
 
 Particle::Particle(std::vector<double> pos,
 				   std::vector<double> vel) : Particle() {
@@ -28,7 +23,7 @@ void Particle::updateVelocity(double param[],
 							  std::vector<double> lower_bounds,
 							  std::vector<double> upper_bounds,
 							  std::vector<double> swarm_best_position) {
-	for (uint i = 0; i < velocity.size(); i++) {
+	for (uint i=0u; i<velocity.size(); i++) {
 		velocity[i] += param[0]*velocity[i] +
 					   param[1]*rand_nums[0]*(best_position[i] - position[i]) +
 					   param[2]*rand_nums[1]*(swarm_best_position[i] - position[i]);
@@ -43,7 +38,7 @@ void Particle::updatePosition(double param[],
 							  std::vector<double> upper_bounds,
 							  std::vector<double> swarm_best_position) {
 	updateVelocity(param, rand_nums, lower_bounds, upper_bounds, swarm_best_position);
-	for (uint i = 0; i < velocity.size(); i++) {
+	for (uint i=0u; i<velocity.size(); i++) {
 		bounce(i, lower_bounds[i], upper_bounds[i]);
 	}
 }
