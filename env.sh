@@ -1,3 +1,0 @@
-export PSO_DIR=$(pwd)
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PSO_DIR/src
-# export LD_LIBRARY_PATH=$PSO_DIR/src
