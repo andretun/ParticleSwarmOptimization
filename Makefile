@@ -18,7 +18,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(SRC_DIR)/%.o, $(SRCS))
 
 # List of shared library files
 SHARED_LIBS = $(patsubst $(SRC_DIR)/%.o, $(SRC_DIR)/%.so, $(OBJS))
-SHARED_LIBS_FLAGS = -L$(SRC_DIR) -lSwarm -lParticle -lutils
+SHARED_LIBS_FLAGS = -L$(SRC_DIR) $(patsubst $(SRC_DIR)/%.so, -l%, $(SHARED_LIBS))
 
 # List of shared library files
 STATIC_LIBS = $(patsubst $(SRC_DIR)/%.o, $(SRC_DIR)/%.a, $(OBJS))

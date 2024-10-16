@@ -1,12 +1,12 @@
 /**
- * @file Swarm.h
- * @brief Header file for class Swarm
+ * @file PSO.h
+ * @brief Header file for class PSO
  * @date 05/10/2024
  * @author Andrea Antonione
  */
 
-#ifndef SWARM_H
-#define SWARM_H
+#ifndef PSO_H
+#define PSO_H
 
 #include "utils.h"
 #include "Particle.h"
@@ -18,17 +18,17 @@
 /**
  * @brief Class for PSO swarm
  */
-class Swarm {
+class PSO {
 public:
 	/**
 	 * @brief Empty constructor
 	 * @details Initializes best iterations to zero
 	 */
-	Swarm();
+	PSO();
 
 	/**
 	 * @brief Constructor
-	 * @see Swarm()
+	 * @see PSO()
 	 * @see initialise()
 	 * @param[in] num_particles number of particles
 	 * @param[in] num_iters number of iterations
@@ -36,7 +36,7 @@ public:
 	 * @param[in] ubs standard vector with problem upper bounds
 	 * @param[in] output csv file name (defaults to "output")
 	 */
-	Swarm(int num_particles,
+	PSO(int num_particles,
 	 	  int num_iters,
 	 	  std::vector<double> lbs,
 		  std::vector<double> ubs,
@@ -45,7 +45,7 @@ public:
 	/**
 	 * @brief Destructor
 	 */
-	~Swarm();
+	~PSO();
 	
 	/**
 	 * @brief Initialise swarm
@@ -74,9 +74,9 @@ public:
 
 private:
 	/**
-	 * Swarm particles
+	 * PSO swarm
 	 */
-	std::vector<Particle> particles;
+	std::vector<Particle> swarm;
 
 	/**
 	 * Problem lower bounds
@@ -104,22 +104,22 @@ private:
 	uint n_particles;
 
 	/**
-	 * Swarm (global) best position
+	 * PSO (global) best position
 	 */
 	std::vector<double> swarm_best_position;
 
 	/**
-	 * Swarm (global) best iteration
+	 * PSO (global) best iteration
 	 */
 	uint swarm_best_iter;
 
 	/**
-	 * Swarm (global) best particle
+	 * PSO (global) best particle
 	 */
 	uint swarm_best_particle;
 
 	/**
-	 * Swarm (global) best fitness
+	 * PSO (global) best fitness
 	 */
 	double swarm_best_fitness;
 

@@ -1,25 +1,25 @@
 /**
- * @file Swarm.cpp
- * @brief Source file for class Swarm
+ * @file PSO.cpp
+ * @brief Source file for class PSO
  * @date 05/10/2024
  * @author Andrea Antonione
  */
 
-#include "Swarm.h"
+#include "PSO.h"
 
-Swarm::Swarm() { swarm_best_iter = 0; }
+PSO::PSO() { swarm_best_iter = 0; }
 
-Swarm::Swarm(int num_particles,
+PSO::PSO(int num_particles,
 			 int num_iters,
 			 std::vector<double> lbs,
 			 std::vector<double> ubs,
-			 std::string name) : Swarm() {
+			 std::string name) : PSO() {
 	initialise(num_particles, num_iters, lbs, ubs, name);
 }
 
-Swarm::~Swarm() {}
+PSO::~PSO() {}
 
-void Swarm::initialise(int num_particles,
+void PSO::initialise(int num_particles,
 			           int num_iters,
 			           std::vector<double> lbs,
 			           std::vector<double> ubs,
@@ -43,24 +43,24 @@ void Swarm::initialise(int num_particles,
 			init_pos.push_back(x);
 			init_vel.push_back(v);
 		}
-		particles.push_back(Particle(init_pos, init_vel));
+		swarm.push_back(Particle(init_pos, init_vel));
 	}
 
 	swarm_best_fitness = std::numeric_limits<double>::infinity();
 
 	outname = name;
 
-	LOG("Swarm initialized\n");
+	LOG("PSO initialized\n");
 	LOG("Particles:%u\n", n_particles);
 	LOG("Iterations:%u\n", n_iterations);
     printToCsv("init");
 }
 
-void Swarm::optimize(std::function<double(std::vector<double>)> fun) {
+void PSO::optimize(std::function<double(std::vector<double>)> fun) {
 	for (uint iter_index = 0; iter_index < n_iterations; iter_index++) {
 		evolveCoefficients(iter_index);
 		uint p_i = 0;
-		for (auto& particle : particles) {
+		for (auto& particle : swarm) {
 			// Evaluate fitness
 			std::vector<double> pos = particle.getPosition();
 	        double fitness = fun(pos);
@@ -89,10 +89,10 @@ void Swarm::optimize(std::function<double(std::vector<double>)> fun) {
     printToCsv("fin");
 }
 
-void Swarm::updateParticles() {
+void PSO::updateParticles() {
 	double random_numbers[2];
 
-	for (auto& particle : particles) {
+	for (auto& particle : swarm) {
 		random_numbers[0] = generateRandom(0., 1.);
 		random_numbers[1] = generateRandom(0., 1.);
 		particle.updatePosition(vel_par,
@@ -103,7 +103,7 @@ void Swarm::updateParticles() {
 	}
 }
 
-void Swarm::printResults() {
+void PSO::printResults() {
     LOG("Result\n");
     LOG("Fitness: %f (iteration %u, particle %u)\n",
 		swarm_best_fitness, swarm_best_iter, swarm_best_particle);
@@ -114,15 +114,14 @@ void Swarm::printResults() {
 	printf("%f\n", swarm_best_position[n_dimensions-1]);
 }
 
-void Swarm::printToCsv(std::string s) {
+void PSO::printToCsv(std::string s) {
 	std::ofstream output(outname + "_" + s + ".csv");
 	for (uint i = 0; i < n_dimensions-1; i++) {
 		output << "x[" << i << "], ";
 	}
 	output << "x[" << n_dimensions-1 << "]\n";
-	for (auto& particle : particles) {
+	for (auto& particle : swarm) {
 		std::vector<double> pos = particle.getPosition();
-		// std::vector<double> pos = particle.getPosition();
 		for (uint i = 0; i < n_dimensions-1; i++) {
     		output << pos[i] << ",";
     	}
@@ -131,7 +130,7 @@ void Swarm::printToCsv(std::string s) {
 	output.close();
 }
 
-void Swarm::evolveCoefficients(uint iter_index) {
+void PSO::evolveCoefficients(uint iter_index) {
 	double diff = (double) iter_index - n_iterations;
 	double den = (double) n_iterations*n_iterations;
 	vel_par[0] = 0.4*diff*diff/den + 0.4;
