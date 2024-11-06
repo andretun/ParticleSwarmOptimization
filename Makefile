@@ -56,7 +56,7 @@ $(SRC_DIR):
 
 # Clean up build artifacts
 clean:
-	rm -f $(SRC_DIR)/*.o $(SRC_DIR)/*.so $(SRC_DIR)/lib*.so $(SRC_DIR)/*.a *.exe
+	rm -f $(SRC_DIR)/*.o $(SRC_DIR)/*.so $(SRC_DIR)/lib*.so $(SRC_DIR)/*.a *.exe *.csv
 
 # Phony targets
 .PHONY: libs all clean

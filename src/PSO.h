@@ -8,12 +8,9 @@
 #ifndef PSO_H
 #define PSO_H
 
-#include "utils.h"
 #include "Particle.h"
 
 #include <functional>
-#include <iostream>
-#include <fstream>
 
 /**
  * @brief Class for PSO swarm
@@ -21,20 +18,20 @@
 class PSO {
 public:
 	/**
-	 * @brief Empty constructor
-	 * @details Initializes best iterations to zero
+	 * @brief Empty constructor.
+	 * @details Initializes best iterations to zero.
 	 */
 	PSO();
 
 	/**
-	 * @brief Constructor
-	 * @see PSO()
-	 * @see initialise()
-	 * @param[in] num_particles number of particles
-	 * @param[in] num_iters number of iterations
-	 * @param[in] lbs standard vector with problem lower bounds
-	 * @param[in] ubs standard vector with problem upper bounds
-	 * @param[in] output csv file name (defaults to "output")
+	 * @brief Constructor.
+	 * @see PSO().
+	 * @see initialise().
+	 * @param[in] num_particles number of particles.
+	 * @param[in] num_iters number of iterations.
+	 * @param[in] lbs standard vector with problem lower bounds.
+	 * @param[in] ubs standard vector with problem upper bounds.
+	 * @param[in] output csv file name (defaults to "output").
 	 */
 	PSO(int num_particles,
 	 	  int num_iters,
@@ -43,32 +40,32 @@ public:
 		  std::string name = "output");
 
 	/**
-	 * @brief Destructor
+	 * @brief Destructor.
 	 */
 	~PSO();
 	
 	/**
-	 * @brief Initialise swarm
-	 * @param[in] num_particles number of particles
-	 * @param[in] num_iters number of iterations
-	 * @param[in] lbs standard vector with problem lower bounds
-	 * @param[in] ubs standard vector with problem upper bounds
-	 * @param[in] output csv file name (defaults to "output")
+	 * @brief Initialise swarm.
+	 * @param[in] num_particles number of particles.
+	 * @param[in] num_iters number of iterations.
+	 * @param[in] lbs standard vector with problem lower bounds.
+	 * @param[in] ubs standard vector with problem upper bounds.
+	 * @param[in] output csv file name. Defaults to "output".
 	 */
 	void initialise(int num_particles,
- 					int num_iters,
-	 	       		std::vector<double> lbs,
-		       		std::vector<double> ubs,
-		    	    std::string name = "output");
+ 					        int num_iters,
+                  std::vector<double> lbs,
+                  std::vector<double> ubs,
+                  std::string name = "output");
 	
 	/**
-	 * @brief Optimization function
-	 * @param[in] fun function to minimizie
+	 * @brief Optimization function.
+	 * @param[in] fun function to minimizie.
 	 */
 	void optimize(std::function<double(std::vector<double>)>);
 
 	/**
-	 * @brief Print results
+	 * @brief Print results.
 	 */
 	void printResults();
 
@@ -157,4 +154,4 @@ private:
 
 };
 
-#endif
+#endif /* PSO_H */

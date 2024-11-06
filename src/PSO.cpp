@@ -6,24 +6,20 @@
  */
 
 #include "PSO.h"
+#include "psoutils.h"
 
-PSO::PSO() { swarm_best_iter = 0; }
+#include <iostream>
+#include <fstream>
 
-PSO::PSO(int num_particles,
-			 int num_iters,
-			 std::vector<double> lbs,
-			 std::vector<double> ubs,
-			 std::string name) : PSO() {
+PSO::PSO() { swarm_best_iter = 0.; }
+
+PSO::PSO(int num_particles, int num_iters, std::vector<double> lbs, std::vector<double> ubs, std::string name) : PSO() {
 	initialise(num_particles, num_iters, lbs, ubs, name);
 }
 
 PSO::~PSO() {}
 
-void PSO::initialise(int num_particles,
-			           int num_iters,
-			           std::vector<double> lbs,
-			           std::vector<double> ubs,
-			 		   std::string name) {
+void PSO::initialise(int num_particles, int num_iters, std::vector<double> lbs, std::vector<double> ubs, std::string name) {
 	// Set problem dimensions
 	lower_bounds = lbs;
 	upper_bounds = ubs;
@@ -53,7 +49,7 @@ void PSO::initialise(int num_particles,
 	LOG("PSO initialized\n");
 	LOG("Particles:%u\n", n_particles);
 	LOG("Iterations:%u\n", n_iterations);
-    printToCsv("init");
+  printToCsv("init");
 }
 
 void PSO::optimize(std::function<double(std::vector<double>)> fun) {
@@ -61,32 +57,26 @@ void PSO::optimize(std::function<double(std::vector<double>)> fun) {
 		evolveCoefficients(iter_index);
 		uint p_i = 0;
 		for (auto& particle : swarm) {
-			// Evaluate fitness
 			std::vector<double> pos = particle.getPosition();
-	        double fitness = fun(pos);
-
-	        // Update best positions if necessary
-	        if(fitness < particle.getBestFitness()) {
-	        	particle.setBestFitness(fitness);
-	        	particle.setBestPosition(pos);
-
-	        	if(fitness < swarm_best_fitness) {
-	        		swarm_best_fitness = fitness;
-	        		swarm_best_position = pos;
+      double fitness = fun(pos);
+      if(fitness < particle.getBestFitness()) {
+        particle.setBestFitness(fitness);
+        particle.setBestPosition(pos);
+        if(fitness < swarm_best_fitness) {
+          swarm_best_fitness = fitness;
+          swarm_best_position = pos;
 					swarm_best_iter = iter_index;
 					swarm_best_particle = p_i;
 					LOG("Fitness: %f (iteration %u, particle %u)\n",
 						swarm_best_fitness, swarm_best_iter, swarm_best_particle);
-	        	}
-	        }
+        }
+      }
 			p_i++;
-	    }
-
-        // Update position for next iteration
-		updateParticles();
     }
-    printResults();
-    printToCsv("fin");
+		updateParticles();
+  }
+  printResults();
+  printToCsv("fin");
 }
 
 void PSO::updateParticles() {
@@ -104,13 +94,13 @@ void PSO::updateParticles() {
 }
 
 void PSO::printResults() {
-    LOG("Result\n");
-    LOG("Fitness: %f (iteration %u, particle %u)\n",
-		swarm_best_fitness, swarm_best_iter, swarm_best_particle);
-    LOG("Position: ");
-    for (uint i = 0; i < n_dimensions-1; i++) {
-    	printf("%f, ", swarm_best_position[i]);
-    }
+  LOG("Result\n");
+  LOG("Fitness: %f (iteration %u, particle %u)\n",
+  swarm_best_fitness, swarm_best_iter, swarm_best_particle);
+  LOG("Position: ");
+  for (uint i = 0; i < n_dimensions-1; i++) {
+    printf("%f, ", swarm_best_position[i]);
+  }
 	printf("%f\n", swarm_best_position[n_dimensions-1]);
 }
 
@@ -123,8 +113,8 @@ void PSO::printToCsv(std::string s) {
 	for (auto& particle : swarm) {
 		std::vector<double> pos = particle.getPosition();
 		for (uint i = 0; i < n_dimensions-1; i++) {
-    		output << pos[i] << ",";
-    	}
+      output << pos[i] << ",";
+    }
 		output << pos[n_dimensions-1] << "\n";
 	}
 	output.close();

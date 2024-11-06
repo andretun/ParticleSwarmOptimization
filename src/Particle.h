@@ -8,10 +8,8 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include "utils.h"
-
 #include <vector>
-#include <limits>
+#include <random>
 
 /**
  * @brief Class for PSO particle
@@ -32,7 +30,7 @@ public:
 	 * @param[in] vel initial initial velocity
 	 */
 	Particle(std::vector<double> pos,
-			 std::vector<double> vel);
+			     std::vector<double> vel);
 
 	/**
 	 * @brief Destructor. NOOP.
@@ -48,10 +46,10 @@ public:
 	 * @param[in] swarm_best_position standard vector with swarm best position
 	 */
 	void updateVelocity(double param[],
-					    double rand_nums[], 
-						std::vector<double> lower_bounds,
-						std::vector<double> upper_bounds,
-						std::vector<double> swarm_best_position);
+					            double rand_nums[], 
+                      std::vector<double> lower_bounds,
+                      std::vector<double> upper_bounds,
+                      std::vector<double> swarm_best_position);
 
 	/**
 	 * @brief Update particle position
@@ -62,10 +60,10 @@ public:
 	 * @param[in] swarm_best_position standard vector with swarm best position
 	 */
 	void updatePosition(double param[],
-					    double rand_nums[], 
-						std::vector<double> lower_bounds,
-						std::vector<double> upper_bounds,
-						std::vector<double> swarm_best_position);
+					            double rand_nums[], 
+                      std::vector<double> lower_bounds,
+                      std::vector<double> upper_bounds,
+                      std::vector<double> swarm_best_position);
 
 	/**
 	 * @brief Set particle new best position
@@ -125,8 +123,8 @@ private:
 	 * @param[in] ub i-th dimension upper bound
 	 */
 	void bounce(uint i,
-				double lb,
-				double ub);
+              double lb,
+              double ub);
 };
 
-#endif
+#endif /* PARTICLE_H */
