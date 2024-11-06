@@ -3,11 +3,11 @@
 
 ## Scope
 ---
-Implementation of a **Particle Swarm Optimization (PSO)** algorithm for minimization problems.
+Simple implementation of a **Particle Swarm Optimization (PSO)** algorithm for minimization problems.
 
 ## Overview
 ---
-The PSO is a type of algorithm based on animal behaviour. It provides a simple, yet, powerful method to iteratively optimize a problem based on a function to minimize (the so-called *objective function*).
+The PSO is a type of algorithm based on animal behaviour. It provides a simple and powerful method to iteratively optimize a problem based on a function to minimize (the so-called *objective function*).
 The strengths of the algorithm lay in its independence from the solution hypersurface gradient and the use of few hyperpararameters.
 As the name suggests, the PSO consists of a *swarm* made of a number of *particles* (animals), which represent the possible solution of the objective function. The particles behave both individually and collectively at the same time, providing a combination between personal exploration of the space and convergence towards the best solution of the swarm.
 
@@ -48,4 +48,12 @@ In this code, an evolution of the three hyperparameters along witht the iteratio
 
 ## Use
 ---
-To use this the particle swarm optimization 
+The usage of the PSO is very simple (see the *example.cpp* in this page):
+
+1. define an objective funtion that returns a double.
+2. define the number of particles and iterations for the algorithm.
+3. define the bounds of the problem (the space dimension will be extracted from the bound).
+4. initialize a *PSO* with the chosen features (optional output file name)
+5. run the optimization
+
+The output file name *.log* is updated at every iteration with the best position and fitness.

@@ -29,10 +29,10 @@ SYMLINKS = $(patsubst $(SRC_DIR)/%.so, $(SRC_DIR)/lib%.so, $(SHARED_LIBS))
 # Default target
 libs: $(OBJS) $(SHARED_LIBS) $(STATIC_LIBS) $(SYMLINKS)
 
-all: libs main
+all: libs example
 
-main:
-	$(GCC) $(GCC_FLAGS) -o main.exe main.cpp $(SHARED_LIBS_FLAGS)
+example:
+	$(GCC) $(GCC_FLAGS) -o example.exe example.cpp $(SHARED_LIBS_FLAGS)
 
 # Rule to create symlinks
 $(SRC_DIR)/lib%.so: $(SRC_DIR)/%.so

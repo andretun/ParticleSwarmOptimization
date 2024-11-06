@@ -3,7 +3,6 @@
 *.o
 *.a
 *.exe
-main.cpp
 
 # Python
 __pycache__
@@ -11,5 +10,5 @@ __pycache__
 *.py
 
 # Others
-*.csv
+*.log
 .vscode/

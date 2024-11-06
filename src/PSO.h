@@ -31,7 +31,7 @@ public:
 	 * @param[in] num_iters number of iterations.
 	 * @param[in] lbs standard vector with problem lower bounds.
 	 * @param[in] ubs standard vector with problem upper bounds.
-	 * @param[in] output csv file name (defaults to "output").
+	 * @param[in] output csv file name. Defaults to "output".
 	 */
 	PSO(int num_particles,
 	 	  int num_iters,
@@ -64,91 +64,86 @@ public:
 	 */
 	void optimize(std::function<double(std::vector<double>)>);
 
-	/**
-	 * @brief Print results.
-	 */
-	void printResults();
-
 private:
 	/**
-	 * PSO swarm
+	 * PSO swarm.
 	 */
 	std::vector<Particle> swarm;
 
 	/**
-	 * Problem lower bounds
+	 * Problem lower bounds.
 	 */
 	std::vector<double> lower_bounds;
 
 	/**
-	 * Problem upper bounds
+	 * Problem upper bounds.
 	 */
 	std::vector<double> upper_bounds;
 
 	/**
-	 * Problem dimensions
+	 * Problem dimensions.
 	 */
 	uint n_dimensions;
 
 	/**
-	 * Number of iterations
+	 * Number of iterations.
 	 */
 	uint n_iterations;
 
 	/**
-	 * Number of particles
+	 * Number of particles.
 	 */
 	uint n_particles;
 
 	/**
-	 * PSO (global) best position
+	 * PSO (global) best position.
 	 */
 	std::vector<double> swarm_best_position;
 
 	/**
-	 * PSO (global) best iteration
+	 * PSO (global) best iteration.
 	 */
 	uint swarm_best_iter;
 
 	/**
-	 * PSO (global) best particle
+	 * PSO (global) best particle.
 	 */
 	uint swarm_best_particle;
 
 	/**
-	 * PSO (global) best fitness
+	 * PSO (global) best fitness.
 	 */
 	double swarm_best_fitness;
 
 	/**
-	 * Default velocity parameters (Clerc and Kennedy constriction coefficients)
+	 * Default velocity parameters (Clerc and Kennedy constriction coefficients).
 	 */
 	double velocity_parameters[3] = {0.7298437881283576, 1.496179765663133, 1.496179765663133};
 
 	/**
-	 * Velocity parameters
+	 * Velocity parameters.
 	 */
 	double vel_par[3];
 
 	/**
-	 * Output csv file name
+	 * Output csv file name.
 	 */
 	std::string outname;
 
 	/**
-	 * @brief Update particles' positions and velocities
+	 * @brief Update particles' positions and velocities.
 	 */
 	void updateParticles();
 
 	/**
-	 * @brief Print final particles position to output csv file
-	 * @param[in] s string to prepend at output file name
+	 * @brief Print progression to csv file.
+	 * @param[in] iter current iteration.
 	 */
-	void printToCsv(std::string s);
+	void printToCsv(uint iter);
 
 	/**
-	 * @brief Evolve velocity coefficients through iterations
-	 * @param[in] iter_index current iteration index
+	 * @brief Evolve velocity coefficients through iterations.
+	 * @param[in] iter_index current iteration index.
 	 */
 	void evolveCoefficients(uint iter_index);
 

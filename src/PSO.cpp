@@ -44,19 +44,19 @@ void PSO::initialise(int num_particles, int num_iters, std::vector<double> lbs, 
 
 	swarm_best_fitness = std::numeric_limits<double>::infinity();
 
-	outname = name;
+	outname = name + ".log";
+  std::remove(outname.c_str()); 
 
 	LOG("PSO initialized\n");
 	LOG("Particles:%u\n", n_particles);
 	LOG("Iterations:%u\n", n_iterations);
-  printToCsv("init");
 }
 
 void PSO::optimize(std::function<double(std::vector<double>)> fun) {
 	for (uint iter_index = 0; iter_index < n_iterations; iter_index++) {
 		evolveCoefficients(iter_index);
 		uint p_i = 0;
-		for (auto& particle : swarm) {
+		for (auto& particle : swarm) {  
 			std::vector<double> pos = particle.getPosition();
       double fitness = fun(pos);
       if(fitness < particle.getBestFitness()) {
@@ -73,10 +73,9 @@ void PSO::optimize(std::function<double(std::vector<double>)> fun) {
       }
 			p_i++;
     }
+    printToCsv(iter_index);
 		updateParticles();
   }
-  printResults();
-  printToCsv("fin");
 }
 
 void PSO::updateParticles() {
@@ -85,38 +84,19 @@ void PSO::updateParticles() {
 	for (auto& particle : swarm) {
 		random_numbers[0] = generateRandom(0., 1.);
 		random_numbers[1] = generateRandom(0., 1.);
-		particle.updatePosition(vel_par,
-								random_numbers,
-								lower_bounds,
-								upper_bounds,
-								swarm_best_position);
+		particle.updatePosition(vel_par, random_numbers, lower_bounds, upper_bounds, swarm_best_position);
 	}
 }
 
-void PSO::printResults() {
-  LOG("Result\n");
-  LOG("Fitness: %f (iteration %u, particle %u)\n",
-  swarm_best_fitness, swarm_best_iter, swarm_best_particle);
-  LOG("Position: ");
+void PSO::printToCsv(uint iter) {
+	std::ofstream output(outname, std::ofstream::out | std::ofstream::app);
+	output << "Iteration: " << iter << std::endl;
+	output << "Best fitness: " << swarm_best_fitness << std::endl;
+	output << "Best position: [";
   for (uint i = 0; i < n_dimensions-1; i++) {
-    printf("%f, ", swarm_best_position[i]);
+    output << swarm_best_position[i] << ", ";
   }
-	printf("%f\n", swarm_best_position[n_dimensions-1]);
-}
-
-void PSO::printToCsv(std::string s) {
-	std::ofstream output(outname + "_" + s + ".csv");
-	for (uint i = 0; i < n_dimensions-1; i++) {
-		output << "x[" << i << "], ";
-	}
-	output << "x[" << n_dimensions-1 << "]\n";
-	for (auto& particle : swarm) {
-		std::vector<double> pos = particle.getPosition();
-		for (uint i = 0; i < n_dimensions-1; i++) {
-      output << pos[i] << ",";
-    }
-		output << pos[n_dimensions-1] << "\n";
-	}
+  output << swarm_best_position[n_dimensions-1] << "]\n" << std::endl;
 	output.close();
 }
 
