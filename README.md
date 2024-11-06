@@ -48,7 +48,7 @@ In this code, an evolution of the three hyperparameters along witht the iteratio
 
 ## Use
 ---
-The usage of the PSO is very simple (see the *example.cpp* in this page):
+The usage of the PSO is very simple (see the [example.cpp](./example.cpp) in this page):
 
 1. define an objective funtion that returns a double.
 2. define the number of particles and iterations for the algorithm.
