@@ -58,4 +58,4 @@ The usage of the PSO is very simple (see the [example.cpp](./example.cpp)):
 
 The output file name *.log* is updated at every iteration with the best position and fitness.
 
-> This cose uses the C++ standard library with C++11 standard.
+> This code uses the C++ standard library with C++11 standard.
