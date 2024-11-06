@@ -23,7 +23,7 @@ At the end of the iteration, each particle position is updated through a velocit
 ---
 A simple C++ implementation of the basic PSO is provided here. The code is based on two main classes, **Particle** and **Swarm**.
 At the initialization, a user-defined number of particles are initialised with random positions (uniformely distributed in the solutions space). After the first iteration, each personal best position and the global best position are set, therefore allowing to build the particle velocities needed to move through the space.
-The position is updated as follows, where _i_ is the index of the particle:
+The position is updated as follows, where *i* is the index of the particle:
 
 $`
 {x_i}(t+1) = x_i(t) + v_i(t+1) = x_i(t) + \omega v_i(t) + c_1 r^1_{(0,1)} (P_i(t) - x_i(t)) + c_2 r^2_{(0,1)} (S_i(t) - x_i(t))
@@ -48,7 +48,7 @@ In this code, an evolution of the three hyperparameters along witht the iteratio
 
 ## Use
 ---
-The usage of the PSO is very simple (see the [example.cpp](./example.cpp) in this page):
+The usage of the PSO is very simple (see the [example.cpp](./example.cpp)):
 
 1. define an objective funtion that returns a double.
 2. define the number of particles and iterations for the algorithm.
@@ -57,3 +57,5 @@ The usage of the PSO is very simple (see the [example.cpp](./example.cpp) in thi
 5. run the optimization
 
 The output file name *.log* is updated at every iteration with the best position and fitness.
+
+> This cose uses the C++ standard library with C++11 standard.
