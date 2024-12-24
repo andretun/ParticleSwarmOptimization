@@ -68,7 +68,7 @@ void PSO::optimize(std::function<double(std::vector<double>)> fun) {
 					swarm_best_iter = iter_index;
 					swarm_best_particle = p_i;
 					LOG("Fitness: %f (iteration %u, particle %u)\n",
-						swarm_best_fitness, swarm_best_iter, swarm_best_particle);
+						  swarm_best_fitness, swarm_best_iter, swarm_best_particle);
         }
       }
 			p_i++;
